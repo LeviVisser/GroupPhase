@@ -12,5 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad9a864c213d45f3872aef5bd87e7780, type: 3}
   m_Name: TeamC
   m_EditorClassIdentifier: 
-  Name: Team C
-  Strength: 6
+  Name: C
+  Strength: 75
+  Defence: 40
+  MatchesPlayed: 0
+  Wins: 0
+  Draws: 0
+  Losses: 0
+  GoalsFor: 0
+  GoalsAgainst: 0
+  Points: 0
+  GoalDifference: 0

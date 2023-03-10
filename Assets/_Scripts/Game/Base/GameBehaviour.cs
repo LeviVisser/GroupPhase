@@ -1,9 +1,7 @@
-﻿using _Scripts.Game.Settings;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// Base game behaviour class for all in scene objects which need update functions
-/// Or state machine changes
 /// </summary>
 public abstract class GameBehaviour : MonoBehaviour
 {

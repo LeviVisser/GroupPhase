@@ -1,23 +1,29 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using _Scripts.Game.Settings;
-using _Scripts.Managers;
 using UnityEngine;
 
+/// <summary>
+/// Bootstrapper class initializes all services and adds them to the service locator
+/// </summary>
 public class Bootstrapper : BaseBootstrapper
 {
-    [Header("Settings")] 
-    public GameSettings GameSettings;
+    [Header("Settings")] public GameSettings GameSettings;
     public UISettings UISettings;
 
-    [Header("Managers")] 
-    public GroupPhaseManager GroupPhaseManager;
+    [Header("Game Services")] public GroupPhaseService groupPhaseService;
 
-    protected override void InstantiateManagers()
+    [Header("UI Services")] 
+    public GroupPhaseServiceView GroupPhaseServiceView;
+
+    public GroupResultsView GroupResultsView;
+
+    protected override void InstantiateServices()
     {
-        TryAddPrefab<GroupPhaseManager>(GroupPhaseManager);
-        
-        List<BaseManager> managers = Services.GetAll<BaseManager>().OrderBy(m => m.Priority).ToList();
+        TryAddPrefab<GroupResultsView>(GroupResultsView);
+        TryAddPrefab<GroupPhaseServiceView>(GroupPhaseServiceView);
+        TryAddPrefab<GroupPhaseService>(groupPhaseService);
+
+        List<BaseService> managers = Services.GetAll<BaseService>().OrderBy(m => m.Priority).ToList();
         for (int i = 0; i < managers.Count; i++)
         {
             Debug.Log("Initialize manager: " + string.Join(", ", managers[i].GetType().ToString()));
@@ -46,7 +52,7 @@ public class Bootstrapper : BaseBootstrapper
 
     protected override void ActivateAllManagers()
     {
-        foreach (BaseManager m in Services.GetAll<BaseManager>())
+        foreach (BaseService m in Services.GetAll<BaseService>())
         {
             m.gameObject.SetActive(true);
         }

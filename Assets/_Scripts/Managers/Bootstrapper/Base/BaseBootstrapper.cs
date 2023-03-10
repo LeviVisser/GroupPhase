@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Abstract base implementation of the bootstrapper
+/// </summary>
 public abstract class BaseBootstrapper : MonoBehaviour
 {
     private static bool _isInitialized;
@@ -18,14 +21,14 @@ public abstract class BaseBootstrapper : MonoBehaviour
         }
 
         InstantiateSettings();
-        InstantiateManagers();
+        InstantiateServices();
 
         ActivateAllServices();
         _isInitialized = true;
     }
 
 
-    protected abstract void InstantiateManagers();
+    protected abstract void InstantiateServices();
     protected abstract void InstantiateSettings();
 
     protected abstract void ActivateAllServices();
